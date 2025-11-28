@@ -17,7 +17,11 @@ ENV RUSTFLAGS="-C link-arg=-Wl,--compress-debug-sections=none"
 WORKDIR /app
 
 
-# ----------- Подготовка к первой инициализации проекта:
+# ----------- Подготовка к первой инициализации проекта (сейчас закомментарено так как по идее нужно сделать однократно):
+# точка монтирования была просто 
+#    volumes:
+#       - .:/app
+#       - /app/node_modules
 # Copy package files first for better caching
 # COPY package*.json ./
 
@@ -35,4 +39,4 @@ RUN rustup target add x86_64-unknown-linux-gnu
 # COPY . .
 
 # Default command (can be overridden in docker-compose)
-CMD ["npm", "run", "build"]
+# CMD ["npm", "run", "build"]

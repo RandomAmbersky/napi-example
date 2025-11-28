@@ -7,9 +7,9 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./source:/app
+      - ./lib:/source/output
     working_dir: /app
-    command: npm run build
+    # command: npm run build
     environment:
       - RUST_BACKTRACE=1
