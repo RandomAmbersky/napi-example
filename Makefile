@@ -1,7 +1,7 @@
 .PHONY: build shell
 
-build:
-	npm run build
+# build:
+# 	npm run build
 
 run:
 	docker-compose run --rm --build napi-rs

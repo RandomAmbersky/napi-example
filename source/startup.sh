@@ -3,4 +3,4 @@
 # exit when any command fails
 set -e
 
-napi build --platform --release -o ./output
+echo "NODE_ENV=${NODE_ENV}"
