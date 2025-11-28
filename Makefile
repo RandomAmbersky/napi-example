@@ -4,4 +4,4 @@ build:
 	npm run build
 
 shell:
-	docker-compose run --rm napi-rs sh
+	docker-compose run --rm --build napi-rs sh
