@@ -7,9 +7,9 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
+      - ./lib:/tmp/output
       - ./source:/app
-      - ./lib:/source/output
     working_dir: /app
-    # command: napi build --platform --release -o ./output
+    command: napi build --platform --release -o /tmp/output
     environment:
       - RUST_BACKTRACE=1
