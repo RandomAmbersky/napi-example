@@ -10,6 +10,6 @@ services:
       - ./source:/app
       - ./lib:/source/output
     working_dir: /app
-    # command: npm run build
+    # command: napi build --platform --release -o ./output
     environment:
       - RUST_BACKTRACE=1
