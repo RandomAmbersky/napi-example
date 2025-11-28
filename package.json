@@ -1,0 +1,16 @@
+{
+  "name": "napi-example",
+  "version": "1.0.0",
+  "description": "Example project using napi-rs",
+  "main": "index.js",
+  "scripts": {
+    "build": "napi build",
+    "build:dev": "napi build --dev"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^2.18.0"
+  },
+  "napi": {
+    "name": "napi-example"
+  }
+}
