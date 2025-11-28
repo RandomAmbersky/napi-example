@@ -12,6 +12,7 @@ RUN apk add --no-cache \
     && source $HOME/.cargo/env
 
 ENV PATH="/root/.cargo/bin:${PATH}"
+ENV RUSTFLAGS="-C link-arg=-Wl,--compress-debug-sections=none"
 
 WORKDIR /app
 
