@@ -38,4 +38,4 @@ RUN rustup target add x86_64-unknown-linux-gnu
 # COPY . .
 
 # Runs when the container launches. Migrating, list migration status, start app
-CMD ["startup.sh"]
+CMD ["sh", "startup.sh"]
