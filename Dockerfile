@@ -38,5 +38,5 @@ RUN rustup target add x86_64-unknown-linux-gnu
 # Copy the rest of the application code
 # COPY . .
 
-# Default command (can be overridden in docker-compose)
-# CMD ["npm", "run", "build"]
+# Runs when the container launches. Migrating, list migration status, start app
+CMD ["startup.sh"]
