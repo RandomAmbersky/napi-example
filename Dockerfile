@@ -16,11 +16,15 @@ ENV RUSTFLAGS="-C link-arg=-Wl,--compress-debug-sections=none"
 
 WORKDIR /app
 
+
+# ----------- Подготовка к первой инициализации проекта:
 # Copy package files first for better caching
 # COPY package*.json ./
 
 # Install Node.js dependencies
 # RUN npm install
+# ----------- Подготовка к первой инициализации проекта:
+
 
 # Install napi-rs/cli globally
 RUN npm install -g @napi-rs/cli
@@ -28,7 +32,7 @@ RUN npm install -g @napi-rs/cli
 RUN rustup target add x86_64-unknown-linux-gnu
 
 # Copy the rest of the application code
-COPY . .
+# COPY . .
 
 # Default command (can be overridden in docker-compose)
 CMD ["npm", "run", "build"]
