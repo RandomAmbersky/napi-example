@@ -17,10 +17,10 @@ ENV RUSTFLAGS="-C link-arg=-Wl,--compress-debug-sections=none"
 WORKDIR /app
 
 # Copy package files first for better caching
-COPY package*.json ./
+# COPY package*.json ./
 
 # Install Node.js dependencies
-RUN npm install
+# RUN npm install
 
 # Install napi-rs/cli globally
 RUN npm install -g @napi-rs/cli
