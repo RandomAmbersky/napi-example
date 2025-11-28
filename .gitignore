@@ -3,3 +3,5 @@ git-set-local.sh
 git-set-remotes.sh
 
 /lib
+.DS_Store
+.idea
