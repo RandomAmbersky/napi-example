@@ -1,4 +1,4 @@
-# `@napi-rs/package-template`
+# `napi-example`
 
 ![https://github.com/napi-rs/package-template/actions](https://github.com/napi-rs/package-template/workflows/CI/badge.svg)
 
@@ -14,14 +14,14 @@
 ## Install this test package
 
 ```bash
-yarn add @napi-rs/package-template
+yarn add napi-example
 ```
 
 ## Ability
 
 ### Build
 
-After `yarn build/npm run build` command, you can see `package-template.[darwin|win32|linux].node` file in project root. This is the native addon built from [lib.rs](./src/lib.rs).
+After `yarn build/npm run build` command, you can see `napi-example.[darwin|win32|linux].node` file in project root. This is the native addon built from [lib.rs](./src/lib.rs).
 
 ### Test
 
@@ -41,7 +41,60 @@ The other problem is how to deliver prebuild `binary` to users. Downloading it i
 
 In this package, we choose a better way to solve this problem. We release different `npm packages` for different platforms. And add it to `optionalDependencies` before releasing the `Major` package to npm.
 
-`NPM` will choose which native package should download from `registry` automatically. You can see [npm](./npm) dir for details. And you can also run `yarn add @napi-rs/package-template` to see how it works.
+`NPM` will choose which native package should download from `registry` automatically. You can see [npm](./npm) dir for details. And you can also run `yarn add napi-example` to see how it works.
+
+## Examples
+
+### Basic Usage
+
+```typescript
+import { plus100 } from 'napi-example';
+
+// Using the plus100 function
+const result = plus100(42);
+console.log(result); // Output: 142
+```
+
+### Advanced Usage with Interfaces
+
+```typescript
+// Define TypeScript interfaces for better type safety
+interface MathOperation {
+  input: number;
+  operation: 'plus' | 'minus' | 'multiply' | 'divide';
+  value: number;
+}
+
+interface MathResult {
+  original: number;
+  result: number;
+  operation: string;
+}
+
+// Function that uses the native addon with proper typing
+function performMathOperation(params: MathOperation): MathResult {
+  switch(params.operation) {
+    case 'plus':
+      return {
+        original: params.input,
+        result: plus100(params.input + params.value),
+        operation: `plus ${params.value}`
+      };
+    default:
+      throw new Error('Unsupported operation');
+  }
+}
+
+// Usage example
+const operation: MathOperation = {
+  input: 10,
+  operation: 'plus',
+  value: 5
+};
+
+const result = performMathOperation(operation);
+console.log(result); // Output: { original: 10, result: 115, operation: 'plus 5' }
+```
 
 ## Develop requirements
 
@@ -85,3 +138,48 @@ git push
 GitHub actions will do the rest job for you.
 
 > WARN: Don't run `npm publish` manually.
+
+## TypeScript Typing Improvements
+
+This project demonstrates several TypeScript typing best practices:
+
+1. **Interface Definitions**: Using interfaces for complex data structures
+2. **Function Signatures**: Explicit typing for function parameters and return values
+3. **Type Safety**: Leveraging TypeScript's compile-time checking to prevent runtime errors
+4. **Documentation**: Adding JSDoc comments for better IDE support
+
+### Benefits of Enhanced Typing
+
+- **Compile-time Error Detection**: Catch type-related errors before runtime
+- **Better IDE Support**: Enhanced autocomplete and refactoring capabilities
+- **Self-documenting Code**: Clear function signatures make code easier to understand
+- **Maintainability**: Easier to refactor and extend codebase
+
+### Adding More Typings
+
+To add more TypeScript typings to this project:
+
+1. Define interfaces for your data structures
+2. Add JSDoc comments to functions
+3. Use generic types where appropriate
+4. Create type aliases for complex types
+5. Export types for use in other modules
+
+Example of adding a new typed function:
+
+```typescript
+/**
+ * Performs a mathematical operation on a number
+ * @param input - The number to operate on
+ * @param operation - The type of operation to perform
+ * @param value - The value to use in the operation
+ * @returns The result of the operation
+ */
+export function performOperation(
+  input: number, 
+  operation: 'add' | 'subtract' | 'multiply' | 'divide', 
+  value: number
+): number {
+  // Implementation would go here
+  return input; // Placeholder
+}
